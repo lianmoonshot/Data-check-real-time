@@ -10,11 +10,11 @@ let page: puppeteer.Page | null = null;
 
 beforeAll(async () => {
     // Insert the test variant into DynamoDB and store the key value
-    // campaignUrl = await insertTestVariant();
-    // basePagePath = '/compare_1_category_ABW_T';
+    campaignUrl = await insertTestVariant();
+    basePagePath = '/compare_1_category_ABW_T';
     // For testing don't delete
-    campaignUrl = 'https://vpnpros.com/apple_ISR_D.html';
-    basePagePath = '/apple_ISR_D';
+    // campaignUrl = 'https://vpnpros.com/apple_ISR_D.html';
+    // basePagePath = '/apple_ISR_D';
 });
 
 afterEach(async () => {
@@ -86,8 +86,8 @@ test('Navigating to Another Page (Non-Test Page)', async () => {
     try {
         browser = await puppeteer.launch({ headless: true });
         page = await browser.newPage();
-        const nonTestPageUrl = 'https://vpnpros.com';  // URL of a page that is not part of the test
-        //const nonTestPageUrl = 'https://liandonttouch.creatorsite.net';
+        // const nonTestPageUrl = 'https://vpnpros.com';  // URL of a page that is not part of the test
+        const nonTestPageUrl = 'https://liandonttouch.creatorsite.net';
         await page.goto(nonTestPageUrl);
         const cookie = await getPageTestCookie(page);
         expect(cookie?.isABTestEnabledForSlug).toBe(false);  // Validate that no test is enabled
